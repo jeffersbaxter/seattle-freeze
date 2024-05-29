@@ -1,0 +1,19 @@
+/*
+ * Citation for the following file:
+ * Date: 5/24/2024
+ * Copied from auto-generated create-react-app index.css
+ * Source URL: https://github.com/react-cosmos/create-react-app-example/blob/master/src/index.css
+*/
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
