@@ -156,6 +156,46 @@ app.get('/api/experiences', function(req, res) {
 });
 
 /**
+ * Endpoint: /api/experiences
+ * Method: POST
+ * Description: Create a new Experience.
+ * Body: {
+ *      title: string,
+ *      description: string,
+ *      date: date,
+ *      price?: float,
+ *      minBirthdate?: date,
+ *      locationId: int
+ * }
+ */
+app.post('/api/experiences', function (req, res) {
+    const { title, description, date, price, minBirthdate, locationId } = req.body;
+    // TODO: validate OPTIONAL minBirthdate property
+    if (!title) {
+        res.status(400).json({Error: "Bad Request. Invalid title value."})
+    } else if (!description) {
+        res.status(400).json({Error: "Bad Request. Invalid description value."})
+    } else if (!date) {
+        res.status(400).json({Error: "Bad Request. Invalid date value."})
+    } else if (!!price && Number.isNaN(price)) {
+        res.status(400).json({Error: "Bad Request. Invalid price value."})
+    } else if (!locationId) {
+        res.status(400).json({Error: "Bad Request. Invalid locationId value."})
+    } else {
+        const createExperience = `INSERT INTO Experiences (title, description, date, price, minBirthdate, locationId) 
+        VALUES ("${title}", "${description}", "${date}", ${price}, "${minBirthdate}", ${locationId});`
+
+        db.pool.query(createExperience, function (err, results, fields) {
+            if (!err) {
+                res.status(201).json({Success: "Experience created successfully!"});
+            } else {
+                res.status(err.code).json({Error: JSON.stringify(err)})
+            }
+        });
+    }
+});
+
+/**
  * Endpoint: /api/patrons
  * Method: GET
  * Description: Get all Patrons.
