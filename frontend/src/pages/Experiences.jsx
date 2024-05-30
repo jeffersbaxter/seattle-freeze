@@ -78,12 +78,12 @@ const Experiences = () => {
         const method = editExperienceId ? 'PUT' : 'POST';
 
         try {
-            // TODO: CREATE/EDIT Experiences
-            // await fetch(url, {
-            //     method,
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(formData),
-            // });
+            if (method === "POST") {
+                const response = await axios.post(url, formData);
+            } else {
+                const response = await axios.put(url, formData);
+            }
+
             fetchExperiences();
             handleCancelClick();
         } catch (error) {
