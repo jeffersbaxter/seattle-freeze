@@ -177,6 +177,42 @@ app.get('/api/patrons', function(req, res) {
 });
 
 /**
+ * Endpoint: /api/patrons
+ * Method: POST
+ * Description: Create a Patron.
+ * Body: {
+ *      firstName: string,
+ *      lastName: int,
+ *      email: string,
+ *      birthdate: date
+ * }
+ */
+app.post('/api/patrons', function(req, res) {
+    const { firstName, lastName, email, birthdate } = req.body;
+
+    if (!firstName) {
+        res.status(400).json({Error: "Client Error: Invalid firstName"})
+    } else if (!lastName) {
+        res.status(400).json({Error: "Client Error: Invalid lastName"})
+    } else if (!email) {
+        res.status(400).json({Error: "Client Error: Invalid email"})
+    } else if (!birthdate) {
+        res.status(400).json({Error: "Client Error:Invalid birthdate "})
+    } else {
+        const createPatron = `INSERT INTO Patrons (firstName, lastName, email, birthdate) 
+        VALUES ("${firstName}", "${lastName}", "${email}", "${birthdate}");`;
+
+        db.pool.query(createPatron, function (err, results, fields) {
+            if (!err) {
+                res.status(201).json(results)
+            } else {
+                res.status(err.code).json({Error: "Failed to make a Patron"});
+            }
+        });
+    }
+});
+
+/**
  * Endpoint: /api/locations
  * Method: GET
  * Description: Get all Locations.
