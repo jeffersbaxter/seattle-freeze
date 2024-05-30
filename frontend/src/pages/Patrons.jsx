@@ -87,8 +87,8 @@ const Patrons = () => {
 
     const handleDeleteClick = async (patronId) => {
         try {
-            // TODO: DELETE Patron
-            // await fetch(`${import.meta.env.VITE_API_URL}patrons/${patronId}`, { method: 'DELETE' });
+            const DELETE_URL = `${import.meta.env.VITE_API_URL}patrons/${patronId}`;
+            const response = await axios.delete(DELETE_URL);
             fetchPatrons();
         } catch (error) {
             console.error('Error deleting patron:', error);
