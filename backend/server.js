@@ -254,6 +254,32 @@ app.put('/api/patrons/:_id', function (req, res) {
 });
 
 /**
+ * Endpoint: /api/patrons/:_id
+ * Method: DELETE
+ * Description: Delete a Patron.
+ * Params: {
+ *      patronId: int,
+ * }
+ */
+app.delete('/api/patrons/:_id', function (req, res) {
+    if (!req.params._id) {
+        res.status(400).json({Error: "Client Error: Invalid Patron Id"});
+    } else {
+        const deletePatron = `DELETE FROM Patrons WHERE patronId = ${req.params._id}`;
+
+        db.pool.query(deletePatron, function (err, results, fields){
+    
+            if (!err) {
+                res.status(204).json({Success: `Successfully deleted the Patron with id: ${req.params._id}`});
+            } else {
+                res.status(500).json({Error: err})
+            }
+        });
+    }
+});
+
+
+/**
  * Endpoint: /api/locations
  * Method: GET
  * Description: Get all Locations.
