@@ -213,6 +213,47 @@ app.post('/api/patrons', function(req, res) {
 });
 
 /**
+ * Endpoint: /api/patrons/:_id
+ * Method: PUT
+ * Description: Update a Patron.
+ * Params: {
+ *      patronId: int,
+ * }
+ * Body: {
+ *      firstName: string,
+ *      lastName: int,
+ *      email: string,
+ *      birthdate: date
+ * }
+ */
+app.put('/api/patrons/:_id', function (req, res) {
+    const { firstName, lastName, email, birthdate } = req.body;
+    const patronId = req.params._id;
+
+    if (!patronId) {
+        res.status(400).json({Error: "Client Error: Invalid patronId"})
+    } else if (!firstName) {
+        res.status(400).json({Error: "Client Error: Invalid firstName"})
+    } else if (!lastName) {
+        res.status(400).json({Error: "Client Error: Invalid lastName"})
+    } else if (!email) {
+        res.status(400).json({Error: "Client Error: Invalid email"})
+    } else if (!birthdate) {
+        res.status(400).json({Error: "Client Error:Invalid birthdate "})
+    } else {
+        const URL = `UPDATE Patrons SET firstName = "${firstName}", lastName = "${lastName}", email = "${email}", birthdate= "${birthdate}" WHERE patronId= ${patronId};`
+
+        db.pool.query(URL, function (err, results, fields) {
+            if (!err) {
+                res.status(201).json(results)
+            } else {
+                res.status(err.code).json({Error: "Failed to update a Patron"});
+            }
+        });
+    }
+});
+
+/**
  * Endpoint: /api/locations
  * Method: GET
  * Description: Get all Locations.
