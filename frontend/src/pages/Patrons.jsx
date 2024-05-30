@@ -66,12 +66,12 @@ const Patrons = () => {
         const method = editPatronId ? 'PUT' : 'POST';
 
         try {
-            // TODO: CREATE/EDIT Patrons
-            // await fetch(url, {
-            //     method,
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(formData),
-            // });
+            if (method === "POST") {
+                const response = await axios.post(url, formData);
+            } else {
+                const EDIT_URL = `${import.meta.env.VITE_API_URL}patrons/${editPatronId}`;
+                const response = await axios.put(EDIT_URL, formData);
+            }
             fetchPatrons();
             handleCancelClick();
         } catch (error) {
