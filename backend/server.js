@@ -171,7 +171,7 @@ app.get('/api/experiences', function(req, res) {
 app.post('/api/experiences', function (req, res) {
     let { title, description, date, price, minBirthdate, locationId } = req.body;
 
-    if (isNaN(price)) {
+    if (!price || isNaN(price)) {
         price = "NULL";
     }
 
@@ -180,7 +180,7 @@ app.post('/api/experiences', function (req, res) {
     } else {
         minBirthdate = `"${minBirthdate}"`;
     }
-    // TODO: validate OPTIONAL minBirthdate property
+
     if (!title) {
         res.status(400).json({Error: "Bad Request. Invalid title value."})
     } else if (!description) {
