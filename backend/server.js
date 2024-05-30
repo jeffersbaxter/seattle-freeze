@@ -169,7 +169,17 @@ app.get('/api/experiences', function(req, res) {
  * }
  */
 app.post('/api/experiences', function (req, res) {
-    const { title, description, date, price, minBirthdate, locationId } = req.body;
+    let { title, description, date, price, minBirthdate, locationId } = req.body;
+
+    if (isNaN(price)) {
+        price = "NULL";
+    }
+
+    if (!minBirthdate || minBirthdate === "") {
+        minBirthdate = "NULL";
+    } else {
+        minBirthdate = `"${minBirthdate}"`;
+    }
     // TODO: validate OPTIONAL minBirthdate property
     if (!title) {
         res.status(400).json({Error: "Bad Request. Invalid title value."})
@@ -183,7 +193,7 @@ app.post('/api/experiences', function (req, res) {
         res.status(400).json({Error: "Bad Request. Invalid locationId value."})
     } else {
         const createExperience = `INSERT INTO Experiences (title, description, date, price, minBirthdate, locationId) 
-        VALUES ("${title}", "${description}", "${date}", ${price}, "${minBirthdate}", ${locationId});`
+        VALUES ("${title}", "${description}", "${date}", ${price}, ${minBirthdate}, ${locationId});`
 
         db.pool.query(createExperience, function (err, results, fields) {
             if (!err) {
