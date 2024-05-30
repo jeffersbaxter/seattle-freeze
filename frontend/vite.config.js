@@ -12,6 +12,13 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
+let PORT = process.env.VITE_PORT
+
+
+if (process.env.DEV_VITE_PORT !== "3000") {
+  PORT = process.env.DEV_VITE_PORT;
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
@@ -20,6 +27,6 @@ export default defineConfig({
   },
   server: {
     // Use VITE_PORT from your .env, or default to a port if not specified
-    port: parseInt(process.env.VITE_PORT, 10) || 5173
+    port: parseInt(PORT, 10) || 5173
   }
 })
