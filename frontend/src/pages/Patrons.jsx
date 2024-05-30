@@ -132,7 +132,7 @@ const Patrons = () => {
                         <br />
                         <label>
                             Birthdate:
-                            <input type="date" name="birthdate" value={formData.birthdate} onChange={handleInputChange} />
+                            <input type="date" name="birthdate" value={formData.birthdate.substring(0, 10)} onChange={handleInputChange} />
                         </label>
                         <br />
                         <button type="submit">{editPatronId ? 'Update Patron' : 'Add Patron'}</button>

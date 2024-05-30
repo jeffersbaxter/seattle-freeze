@@ -139,7 +139,7 @@ const Experiences = () => {
                         <br />
                         <label>
                             Date:
-                            <input type="datetime-local" name="date" value={formData.date} onChange={handleInputChange} />
+                            <input type="datetime-local" name="date" value={formData.date.substring(0, 16)} onChange={handleInputChange} />
                         </label>
                         <br />
                         <label>
@@ -149,7 +149,7 @@ const Experiences = () => {
                         <br />
                         <label>
                             Min Birthdate:
-                            <input type="date" name="minBirthdate" value={formData.minBirthdate} onChange={handleInputChange} />
+                            <input type="date" name="minBirthdate" value={formData.minBirthdate.substring(0, 10)} onChange={handleInputChange} />
                         </label>
                         <br />
                         <label>
