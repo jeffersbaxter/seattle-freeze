@@ -5,6 +5,7 @@
     "type": "module",
     "scripts": {
       "start": "vite",
+      "dev": "DEV_VITE_PORT=9753 vite",
       "build": "vite build",
       "serve": "npx forever start reactServer.cjs",
       "nodemon-server": "nodemon reactServer.cjs",
