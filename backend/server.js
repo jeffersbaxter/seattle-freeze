@@ -408,6 +408,60 @@ app.get('/api/locations', function (req, res) {
 });
 
 /**
+ * Endpoint: /api/locations/:_id
+ * Method: PUT
+ * Description: Update a Location.
+ * Params: {
+ *      locationId: int,
+ * }
+ * Body: {
+ *      addressNumber: string,
+ *      city: string,
+ *      state: string,
+ *      streetName: string,
+ *      unitNumber?: string,
+ *      zipCode: string
+ * }
+ */
+app.put('/api/locations/:_id', function (req, res) {
+    let { addressNumber, city, state, streetName, unitNumber, zipCode } = req.body;
+    const locationId = req.params._id;
+
+    if (!unitNumber) {
+        unitNumber = "NULL";
+    } else {
+        unitNumber = `"${unitNumber}"`;
+    }
+
+    if (!locationId) {
+        res.status(400).json({Error: "Client Error: Invalid locationId"})
+    } else if (!addressNumber) {
+        res.status(400).json({Error: "Client Error: Invalid addressNumber"})
+    } else if (!city) {
+        res.status(400).json({Error: "Client Error: Invalid city"})
+    } else if (!state) {
+        res.status(400).json({Error: "Client Error: Invalid state"})
+    } else if (!streetName) {
+        res.status(400).json({Error: "Client Error:Invalid streetName "})
+    } else if (!zipCode) {
+        res.status(400).json({Error: "Client Error:Invalid zipCode "})
+    } else {
+        // const URL = `UPDATE Patrons SET firstName = "${firstName}", lastName = "${lastName}", email = "${email}", birthdate= "${birthdate}" WHERE patronId= ${patronId};`
+        const URL = `UPDATE Locations SET addressNumber = "${addressNumber}", 
+        city = "${city}", state = "${state}", streetName= "${streetName}", 
+        unitNumber = ${unitNumber}, zipCode = "${zipCode}" WHERE locationId= ${locationId};`
+
+        db.pool.query(URL, function (err, results, fields) {
+            if (!err) {
+                res.status(200).json(results)
+            } else {
+                res.status(err.code).json({Error: "Failed to update a Location"});
+            }
+        });
+    }
+});
+
+/**
  * Endpoint: /api/reviews
  * Method: GET
  * Description: Get all Reviews.
