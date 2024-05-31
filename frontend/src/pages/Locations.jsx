@@ -69,8 +69,7 @@ const Locations = () => {
             if (method === "POST") {
                 const response = await axios.post(url, formData);
             } else {
-                const EDIT_URL = `${import.meta.env.VITE_APT_URL}locations/${editLocationId}`; 
-                const response = await axios.put(EDIT_URL, formData);
+                const response = await axios.put(url, formData);
             }
             fetchLocations();
             handleCancelClick();
