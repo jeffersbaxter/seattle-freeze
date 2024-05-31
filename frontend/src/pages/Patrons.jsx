@@ -103,6 +103,7 @@ const Patrons = () => {
             <nav>
                 <ul>
                     <li><Link to="/">Home</Link></li>
+                    <li><Link to="/patrons">Patrons</Link></li>
                     <li><Link to="/experiences">Experiences</Link></li>
                     <li><Link to="/paidExperiences">Paid Experiences</Link></li>
                     <li><Link to="/locations">Locations</Link></li>

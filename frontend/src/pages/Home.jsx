@@ -9,6 +9,7 @@ const Home = () => {
                 <h1>Seattle Freeze</h1>
                 <nav>
                     <ul>
+                        <li><a href="/">Home</a></li>
                         <li><a href="/patrons">Patrons</a></li>
                         <li><a href="/experiences">Experiences</a></li>
                         <li><a href="/paidExperiences">Paid Experiences</a></li>
