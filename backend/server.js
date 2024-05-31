@@ -408,6 +408,53 @@ app.get('/api/locations', function (req, res) {
 });
 
 /**
+ * Endpoint: /api/locations
+ * Method: POST
+ * Description: Create a Location.
+ * Body: {
+ *      addressNumber: string,
+ *      city: string,
+ *      state: string,
+ *      streetName: string,
+ *      unitNumber?: string,
+ *      zipCode: string
+ * }
+ */
+app.post('/api/locations', function (req, res) {
+    let { addressNumber, city, state, streetName, unitNumber, zipCode } = req.body;
+    const locationId = req.params._id;
+
+    if (!unitNumber) {
+        unitNumber = "NULL";
+    } else {
+        unitNumber = `"${unitNumber}"`;
+    }
+
+    if (!addressNumber) {
+        res.status(400).json({Error: "Client Error: Invalid addressNumber"})
+    } else if (!city) {
+        res.status(400).json({Error: "Client Error: Invalid city"})
+    } else if (!state) {
+        res.status(400).json({Error: "Client Error: Invalid state"})
+    } else if (!streetName) {
+        res.status(400).json({Error: "Client Error:Invalid streetName "})
+    } else if (!zipCode) {
+        res.status(400).json({Error: "Client Error:Invalid zipCode "})
+    } else {
+        const URL = `INSERT INTO Locations (addressNumber, streetName, unitNumber, city, state, zipCode) 
+        VALUES ("${addressNumber}", "${streetName}", ${unitNumber}, "${city}", "${state}", "${zipCode}");`;
+
+        db.pool.query(URL, function (err, results, fields) {
+            if (!err) {
+                res.status(200).json(results)
+            } else {
+                res.status(err.code).json({Error: "Failed to create a Location"});
+            }
+        });
+    }
+});
+
+/**
  * Endpoint: /api/locations/:_id
  * Method: PUT
  * Description: Update a Location.
