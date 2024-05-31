@@ -145,7 +145,7 @@ app.delete('/api/roles/:_id', function(req, res) {
 app.get('/api/experiences', function(req, res) {
     const getExperiences = 'SELECT Experiences.experienceId, Experiences.title, Experiences.description, Experiences.date, Experiences.price, \
     Experiences.minBirthdate, \
-    CONCAT(Locations.addressNumber," ", Locations.streetName," ", COALESCE(Locations.unitNumber, "")," ", Locations.city) AS address \
+    CONCAT(Locations.addressNumber," ", Locations.streetName," ", COALESCE(Locations.unitNumber, "")," ", Locations.city) AS address, Locations.locationId \
     FROM Experiences \
     JOIN Locations ON Experiences.locationId = Locations.locationId';
 
