@@ -206,6 +206,61 @@ app.post('/api/experiences', function (req, res) {
 });
 
 /**
+ * Endpoint: /api/experiences/:_id
+ * Method: PUT
+ * Description: Edit a new Experience.
+ * Params: {
+ *      experienceId: int
+ * }
+ * Body: {
+ *      title: string,
+ *      description: string,
+ *      date: date,
+ *      price?: float,
+ *      minBirthdate?: date,
+ *      locationId: int
+ * }
+ */
+app.put('/api/experiences/:_id', function (req, res) {
+    let { title, description, date, price, minBirthdate, locationId } = req.body;
+
+    if (!price || isNaN(price)) {
+        price = "NULL";
+    }
+
+    if (!minBirthdate || minBirthdate === "") {
+        minBirthdate = "NULL";
+    } else {
+        minBirthdate = `"${minBirthdate}"`;
+    }
+
+    if (req.params._id) {
+        res.status(400).json({Error: "Bad Request. Invalid experienceId"});
+    } else if (!title) {
+        res.status(400).json({Error: "Bad Request. Invalid title value."})
+    } else if (!description) {
+        res.status(400).json({Error: "Bad Request. Invalid description value."})
+    } else if (!date) {
+        res.status(400).json({Error: "Bad Request. Invalid date value."})
+    } else if (!!price && Number.isNaN(price)) {
+        res.status(400).json({Error: "Bad Request. Invalid price value."})
+    } else if (!locationId) {
+        res.status(400).json({Error: "Bad Request. Invalid locationId value."})
+    } else {
+        const editExperience = `UPDATE Experiences SET title = "${title}", description = "${description}", date = "${date}", 
+        price = ${price}, minBirthdate = ${minBirthdate}, locationId = ${locationId} WHERE experienceId = ${req.params._id};`
+
+        db.pool.query(editExperience, function (err, results, fields) {
+            if (!err) {
+                res.status(200).json({Success: "Experience edited successfully!"});
+            } else {
+                res.status(err.code).json({Error: JSON.stringify(err)})
+            }
+        });
+    }
+});
+
+/**
  * Endpoint: /api/patrons
  * Method: GET
  * Description: Get all Patrons.
