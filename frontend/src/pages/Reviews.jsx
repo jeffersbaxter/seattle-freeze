@@ -140,6 +140,7 @@ const Reviews = () => {
                     <li><Link to="/experiences">Experiences</Link></li>
                     <li><Link to="/paidExperiences">Paid Experiences</Link></li>
                     <li><Link to="/locations">Locations</Link></li>
+                    <li><Link to="/reviews">Reviews</Link></li>
                     <li><Link to="/roles">Roles</Link></li>
                     <li><Link to="/roleCategories">Role Categories</Link></li>
                 </ul>
