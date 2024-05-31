@@ -4,11 +4,11 @@ Seattle Freeze is an experience-management system that allows people to organize
 
 * Reviews - CRUD
 * Roles - CRD
-* Experiences - R
-* Patrons - R
+* Experiences - CRU
+* Patrons - CRUD
 * RoleCategories - R
 * PaidExperiences - R
-* Locations - R
+* Locations - CRU
 
 # Sources from create-react-app
 
