@@ -62,16 +62,16 @@ const Locations = () => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        const url = editLocationId ? `${import.meta.env.VITE_API_URL}${editLocationId}` : import.meta.env.VITE_API_URL + 'locations';
+        const url = editLocationId ? `${import.meta.env.VITE_API_URL}locations/${editLocationId}` : import.meta.env.VITE_API_URL + 'locations';
         const method = editLocationId ? 'PUT' : 'POST';
 
         try {
-            // TODO: CREATE/EDIT Locations
-            // await fetch(url, {
-            //     method,
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(formData),
-            // });
+            if (method === "POST") {
+                const response = await axios.post(url, formData);
+            } else {
+                const EDIT_URL = `${import.meta.env.VITE_APT_URL}locations/${editLocationId}`; 
+                const response = await axios.put(EDIT_URL, formData);
+            }
             fetchLocations();
             handleCancelClick();
         } catch (error) {
