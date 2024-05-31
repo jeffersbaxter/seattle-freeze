@@ -234,7 +234,7 @@ app.put('/api/experiences/:_id', function (req, res) {
         minBirthdate = `"${minBirthdate}"`;
     }
 
-    if (req.params._id) {
+    if (!req.params._id) {
         res.status(400).json({Error: "Bad Request. Invalid experienceId"});
     } else if (!title) {
         res.status(400).json({Error: "Bad Request. Invalid title value."})
