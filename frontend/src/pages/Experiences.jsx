@@ -93,7 +93,14 @@ const Experiences = () => {
 
     const handleEditClick = (experience) => {
         setEditExperienceId(experience.experienceId);
-        setFormData({ title: experience.title, description: experience.description, date: experience.date, price: experience.price, minBirthdate: experience.minBirthdate, locationId: experience.locationId });
+        setFormData({ 
+            title: experience.title, 
+            description: experience.description, 
+            date: (experience.date ? experience.date.substring(0, 16) : ""), 
+            price: (experience.price ? experience.price : ""), 
+            minBirthdate: (!!experience.minBirthdate ? experience.minBirthdate.substring(0, 10) : ""), 
+            locationId: experience.locationId 
+        });
         setShowAddExperience(true);
     };
 
@@ -139,7 +146,7 @@ const Experiences = () => {
                         <br />
                         <label>
                             Date:
-                            <input type="datetime-local" name="date" value={formData.date.substring(0, 16)} onChange={handleInputChange} />
+                            <input type="datetime-local" name="date" value={formData.date} onChange={handleInputChange} />
                         </label>
                         <br />
                         <label>
@@ -147,9 +154,10 @@ const Experiences = () => {
                             <input type="text" name="price" value={formData.price} onChange={handleInputChange} />
                         </label>
                         <br />
+                        <p>{formData.minBirthdate}</p>
                         <label>
                             Min Birthdate:
-                            <input type="date" name="minBirthdate" value={formData.minBirthdate.substring(0, 10)} onChange={handleInputChange} />
+                            <input type="date" name="minBirthdate" value={formData.minBirthdate} onChange={handleInputChange} />
                         </label>
                         <br />
                         <label>
