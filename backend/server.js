@@ -320,6 +320,31 @@ app.put('/api/experiences/:_id', function (req, res) {
 });
 
 /**
+ * Endpoint: /api/experiences/:_id
+ * Method: DELETE
+ * Description: Delete an Experience.
+ * Params: {
+ *      experienceId: int
+ * }
+ */
+app.delete('/api/experiences/:_id', function (req, res) {
+    if (!req.params._id) {
+        res.status(400).json({Error: "Client Error: Invalid Experience Id"});
+    } else {
+        const deleteExperience = `DELETE FROM Experiences WHERE experienceId = ${req.params._id}`;
+
+        db.pool.query(deleteExperience, function (err, results, fields){
+    
+            if (!err) {
+                res.status(204).json({Success: `Successfully deleted the Experience with id: ${req.params._id}`});
+            } else {
+                res.status(500).json({Error: err})
+            }
+        });
+    }
+});
+
+/**
  * Endpoint: /api/patrons
  * Method: GET
  * Description: Get all Patrons.
