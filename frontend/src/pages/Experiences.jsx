@@ -166,7 +166,6 @@ const Experiences = () => {
                             <input type="text" name="price" value={formData.price} onChange={handleInputChange} />
                         </label>
                         <br />
-                        <p>{formData.minBirthdate}</p>
                         <label>
                             Min Birthdate:
                             <input type="date" name="minBirthdate" value={formData.minBirthdate} onChange={handleInputChange} />
