@@ -106,8 +106,8 @@ const Experiences = () => {
 
     const handleDeleteClick = async (experienceId) => {
         try {
-            // TODO: DELETE Experience by ID
-            // await fetch(`${import.meta.env.VITE_API_URL}experiences/${experienceId}`, { method: 'DELETE' });
+            const DELETE_URL = `${import.meta.env.VITE_API_URL}experiences/${experienceId}`;
+            const response = await axios.delete(DELETE_URL);
             fetchExperiences();
         } catch (error) {
             console.error('Error deleting experience:', error);
@@ -129,17 +129,6 @@ const Experiences = () => {
                     <li><Link to="/reviews">Reviews</Link></li>
                     <li><Link to="/roles">Roles</Link></li>
                     <li><Link to="/roleCategories">Role Categories</Link></li>
-                </ul>
-            </nav>
-            <nav>
-                <ul>
-                    <li><a href="/patrons">Patrons</a></li>
-                    <li><a href="/experiences">Experiences</a></li>
-                    <li><a href="/paidExperiences">Paid Experiences</a></li>
-                    <li><a href="/locations">Locations</a></li>
-                    <li><a href="/reviews">Reviews</a></li>
-                    <li><a href="/roles">Roles</a></li>
-                    <li><a href="/roleCategories">Role Categories</a></li>
                 </ul>
             </nav>
             {showAddExperience ? (
