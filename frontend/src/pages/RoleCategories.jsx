@@ -65,12 +65,12 @@ const RoleCategories = () => {
         const method = editRoleCategoryId ? 'PUT' : 'POST';
 
         try {
-            // TODO: CREATE/EDIT Role Categories
-            // await fetch(url, {
-            //     method,
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(formData),
-            // });
+            if (method === "POST") {
+                const response = await axios.post(url, formData);
+            } else {
+                const response = await axios.put(url, formData);
+            }
+
             fetchRoleCategories();
             handleCancelClick();
         } catch (error) {
