@@ -43,6 +43,39 @@ app.get('/api/role-categories', function(req, res) {
 });
 
 /**
+ * Endpoint: /api/role-categories/:_id
+ * Method: PUT
+ * Description: Edit a Role Category.
+ * Params: {
+ *      roleCategoryId: int
+ * }
+ * Body: {
+ *      roleDescription: string
+ * }
+ */
+app.put('/api/role-categories/:_id', function (req, res) {
+    const {roleDescription} = req.body;
+    const roleCategoryId = req.params._id;
+
+    if (!roleCategoryId) {
+        res.status(400).json({Error: "Bad Request. Invalid roleCategoryId value."})
+    } else if (!roleDescription) {
+        res.status(400).json({Error: "Bad Request. Invalid roleDescription value."})
+    } else {
+        const updateRoleCategory = `UPDATE RoleCategories SET roleDescription = "${roleDescription}" WHERE roleCategoryId = ${roleCategoryId}`;
+
+        db.pool.query(updateRoleCategory, function (error, results, fields) {
+            if (!error) {
+                res.status(200).json({Success: "Successfully updated a role category."})
+            } else {
+                res.status(error.code).json({Error: JSON.stringify(error)})
+            }
+        });
+    }
+
+});
+
+/**
  * Endpoint: /api/roles
  * Method: GET
  * Description: Get all Roles.
