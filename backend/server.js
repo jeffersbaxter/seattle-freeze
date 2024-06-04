@@ -43,6 +43,32 @@ app.get('/api/role-categories', function(req, res) {
 });
 
 /**
+ * Endpoint: /api/role-categories
+ * Method: POST
+ * Description: Create a Role Category.
+ * Body: {
+ *      roleDescription: string
+ * }
+ */
+app.post('/api/role-categories', function (req, res) {
+    const {roleDescription} = req.body;
+
+    if (!roleDescription) {
+        res.status(400).json({Error: "Bad Request. Invalid roleDescription value."})
+    } else {
+        const createRoleCategory = `INSERT INTO RoleCategories (roleDescription) VALUES ("${roleDescription}");`
+
+        db.pool.query(createRoleCategory, function (error, results, fields) {
+            if (!error) {
+                res.status(201).json({Success: "Successfully create a role category."})
+            } else {
+                res.status(error.code).json({Error: JSON.stringify(error)})
+            }
+        });
+    }
+});
+
+/**
  * Endpoint: /api/role-categories/:_id
  * Method: PUT
  * Description: Edit a Role Category.
