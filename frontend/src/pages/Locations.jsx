@@ -86,8 +86,8 @@ const Locations = () => {
 
     const handleDeleteClick = async (locationId) => {
         try {
-            // TODO: DELETE Location by ID
-            // await fetch(`${import.meta.env.VITE_API_URL}${locationId}`, { method: 'DELETE' });
+            const DELETE_URL = `${import.meta.env.VITE_API_URL}locations/${locationId}`;
+            const response = await axios.delete(DELETE_URL);
             fetchLocations();
         } catch (error) {
             console.error('Error deleting location:', error);
