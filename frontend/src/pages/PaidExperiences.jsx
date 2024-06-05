@@ -95,12 +95,11 @@ const PaidExperiences = () => {
         const method = editPaidExperienceId ? 'PUT' : 'POST';
 
         try {
-            // TODO: CREATE/EDIT PaidExperiences
-            // await fetch(url, {
-            //     method,
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(formData),
-            // });
+            if (method === "POST") {
+                const response = await axios.post(url, formData);
+            } else {
+                const response = await axios.put(url, formData);
+            }
             fetchPaidExperiences();
             handleCancelClick();
         } catch (error) {
@@ -116,8 +115,8 @@ const PaidExperiences = () => {
 
     const handleDeleteClick = async (paidExperienceId) => {
         try {
-            // TODO: DELETE PaidExperience
-            // await fetch(`${import.meta.env.VITE_API_URL}${paidExperienceId}`, { method: 'DELETE' });
+            const DELETE_URL = `${import.meta.env.VITE_API_URL}paid-experiences/${paidExperienceId}`;
+            const response = await axios.delete(DELETE_URL);
             fetchPaidExperiences();
         } catch (error) {
             console.error('Error deleting paid experience:', error);
