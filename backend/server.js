@@ -789,6 +789,67 @@ app.get('/api/paid-experiences', function (req, res) {
     });
 });
 
+/**
+ * Endpoint: /api/paid-experiences
+ * Method: POST
+ * Description: Create a PaidExperience.
+ * Body: {
+ *      cost: float,
+ *      patronId: int,
+ *      experienceId: int
+ * }
+ */
+app.post('/api/paid-experiences', function (req, res) {
+    let { cost, experienceId, patronId } = req.body;
+
+    if (!cost || isNaN(cost)) {
+        cost = "NULL";
+    }
+
+    if (!experienceId) {
+        res.status(400).json({Error: "Client Error: Invalid experienceId"})
+    } else if (!patronId) {
+        res.status(400).json({Error: "Client Error: Invalid patronId"})
+    } else {
+        const createPaidExperience = `INSERT INTO PaidExperiences (cost, experienceId, patronId) 
+        VALUES (${cost}, ${experienceId}, ${patronId});`;
+    
+        db.pool.query(createPaidExperience, function (err, results, fields){
+    
+            if (!err) {
+                res.status(200).json(results);
+            } else {
+                res.status(err.code).json({Error: JSON.stringify(err) })
+            }
+        });
+    }
+});
+
+/**
+ * Endpoint: /api/paid-experiences/:_id
+ * Method: DELETE
+ * Description: DELETE PaidExperience by Id.
+ * Params: {
+ *      paidExperienceId: int,
+ * }
+ */
+app.delete('/api/paid-experiences/:_id', function (req, res) {
+    if (!req.params._id) {
+        res.status(400).json({Error: "Client Error: Invalid paidExperienceId Id"});
+    } else {
+        const deletePaidExperience = `DELETE FROM PaidExperiences WHERE paidExperienceId = ${req.params._id}`;
+
+        db.pool.query(deletePaidExperience, function (err, results, fields){
+    
+            if (!err) {
+                res.status(204).json({Success: `Successfully deleted the PaidExperience with id: ${req.params._id}`});
+            } else {
+                res.status(err.code).json({Error: JSON.stringify(err) })
+            }
+        });
+    }
+});
+
 /*
     LISTENER
 */
