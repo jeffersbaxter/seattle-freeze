@@ -593,6 +593,31 @@ app.put('/api/locations/:_id', function (req, res) {
 });
 
 /**
+ * Endpoint: /api/locations/:_id
+ * Method: DELETE
+ * Description: Delete a Location.
+ * Params: {
+ *      locationId: int
+ * }
+ */
+app.delete('/api/locations/:_id', function (req, res) {
+    if (!req.params._id) {
+        res.status(400).json({Error: "Client Error: Invalid Location Id"});
+    } else {
+        const deleteLocation = `DELETE FROM Locations WHERE locationId = ${req.params._id}`;
+
+        db.pool.query(deleteLocation, function (err, results, fields){
+    
+            if (!err) {
+                res.status(204).json({Success: `Successfully deleted the Location with id: ${req.params._id}`});
+            } else {
+                res.status(err.code).json({Error: err})
+            }
+        });
+    }
+});
+
+/**
  * Endpoint: /api/reviews
  * Method: GET
  * Description: Get all Reviews.
