@@ -116,7 +116,7 @@ app.put('/api/role-categories/:_id', function (req, res) {
  * }>
  */
 app.get('/api/roles', function(req, res) {
-    const getRoles = 'SELECT Roles.roleId, Patrons.firstName, Patrons.lastName, RoleCategories.roleDescription, Experiences.title FROM Roles \
+    const getRoles = 'SELECT Roles.roleId, Patrons.patronId, Experiences.experienceId, RoleCategories.roleCategoryId, Patrons.firstName, Patrons.lastName,\ RoleCategories.roleDescription, Experiences.title FROM Roles \
     JOIN Patrons ON Roles.patronId = Patrons.patronId JOIN Experiences ON \
     Roles.experienceId = Experiences.experienceId JOIN RoleCategories ON Roles.roleCategoryId = RoleCategories.roleCategoryId ORDER BY Roles.roleId;';
 
