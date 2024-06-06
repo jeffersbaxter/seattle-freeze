@@ -117,12 +117,12 @@ const Locations = () => {
                     <form onSubmit={handleFormSubmit}>
                         <label>
                             Address Number:
-                            <input type="text" name="addressNumber" value={formData.addressNumber} onChange={handleInputChange} />
+                            <input type="text" required name="addressNumber" value={formData.addressNumber} onChange={handleInputChange} />
                         </label>
                         <br />
                         <label>
                             Street Name:
-                            <input type="text" name="streetName" value={formData.streetName} onChange={handleInputChange} />
+                            <input type="text" required name="streetName" value={formData.streetName} onChange={handleInputChange} />
                         </label>
                         <br />
                         <label>
@@ -132,17 +132,17 @@ const Locations = () => {
                         <br />
                         <label>
                             City:
-                            <input type="text" name="city" value={formData.city} onChange={handleInputChange} />
+                            <input type="text" required name="city" value={formData.city} onChange={handleInputChange} />
                         </label>
                         <br />
                         <label>
                             State:
-                            <input type="text" name="state" value={formData.state} onChange={handleInputChange} />
+                            <input type="text" required name="state" value={formData.state} onChange={handleInputChange} />
                         </label>
                         <br />
                         <label>
                             Zip Code:
-                            <input type="text" name="zipCode" value={formData.zipCode} onChange={handleInputChange} />
+                            <input type="text" required name="zipCode" value={formData.zipCode} onChange={handleInputChange} />
                         </label>
                         <br />
                         <button type="submit">{editLocationId ? 'Update Location' : 'Add Location'}</button>
