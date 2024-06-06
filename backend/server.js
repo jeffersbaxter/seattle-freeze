@@ -162,6 +162,45 @@ app.post('/api/roles', function(req, res) {
 
 /**
  * Endpoint: /api/roles/:_id
+ * Method: PUT
+ * Description: Edit a Role.
+ * Params: {
+ *      roleId: int,
+ * }
+ * Body: {
+ *      patronId: int,
+ *      roleCategoryId: int,
+ *      experienceId: int
+ * }
+ */
+app.put('/api/roles/:_id', function(req, res) {
+    const { patronId, roleCategoryId, experienceId } = req.body;
+    const roleId = req.params._id;
+
+    if (!roleId) {
+        res.status(400).json({Error: "Bad Request. Invalid roleId value."})
+    } else if (!patronId || !Number.isSafeInteger(parseInt(patronId))) {
+        res.status(400).json({Error: "Bad Request. Invalid patronId value."})
+    } else if (!roleCategoryId || !Number.isSafeInteger(parseInt(roleCategoryId))) {
+        res.status(400).json({Error: "Bad Request. Invalid roleCategoryId value."})
+    } else if (!experienceId || !Number.isSafeInteger(parseInt(experienceId))) {
+        res.status(400).json({Error: "Bad Request. Invalid experienceId value."})
+    } else {
+        const updateRole = `UPDATE Roles SET patronId = ${patronId}, roleCategoryId = ${roleCategoryId}, experienceId = ${experienceId} WHERE roleId = ${req.params._id};`
+        
+        db.pool.query(updateRole, function (err, results, fields) {
+            if (!err) {
+                res.status(200).json({Success: `Role, with id: ${req.params._id}, updated successfully!`});
+            } else {
+                res.status(err.code).json({Error: JSON.stringify(err) })
+            }
+        });
+    }
+});
+
+
+/**
+ * Endpoint: /api/roles/:_id
  * Method: DELETE
  * Description: Delete a Role by Id.
  * Params: {
