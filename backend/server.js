@@ -245,7 +245,7 @@ app.get('/api/experiences', function(req, res) {
     Experiences.minBirthdate, \
     CONCAT(Locations.addressNumber," ", Locations.streetName," ", COALESCE(Locations.unitNumber, "")," ", Locations.city) AS address, Locations.locationId \
     FROM Experiences \
-    JOIN Locations ON Experiences.locationId = Locations.locationId';
+    LEFT JOIN Locations ON Experiences.locationId = Locations.locationId';
 
     db.pool.query(getExperiences, function (err, results, fields){
 
