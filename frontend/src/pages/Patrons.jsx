@@ -1,7 +1,7 @@
 // projfreeze/frontend/src/pages/Patrons.js
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import '../style.css'; 
 
@@ -12,6 +12,7 @@ const Patrons = () => {
     const [editPatronId, setEditPatronId] = useState(null);
     const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', birthdate: '' });
     const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchPatrons();
@@ -49,9 +50,7 @@ const Patrons = () => {
     };
 
     const handleNewPatronClick = () => {
-        setShowAddPatron(true);
-        setEditPatronId(null);
-        setFormData({ firstName: '', lastName: '', email: '', birthdate: '' });
+        navigate("/patrons/create");
     };
 
     const handleCancelClick = () => {
@@ -62,16 +61,11 @@ const Patrons = () => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        const url = editPatronId ? `${import.meta.env.VITE_API_URL}patrons/${editPatronId}` : import.meta.env.VITE_API_URL + 'patrons';
-        const method = editPatronId ? 'PUT' : 'POST';
+        const url = `${import.meta.env.VITE_API_URL}patrons/${editPatronId}`
 
         try {
-            if (method === "POST") {
-                const response = await axios.post(url, formData);
-            } else {
-                const EDIT_URL = `${import.meta.env.VITE_API_URL}patrons/${editPatronId}`;
-                const response = await axios.put(EDIT_URL, formData);
-            }
+            const EDIT_URL = `${import.meta.env.VITE_API_URL}patrons/${editPatronId}`;
+            const response = await axios.put(EDIT_URL, formData);
             fetchPatrons();
             handleCancelClick();
         } catch (error) {
