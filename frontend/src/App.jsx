@@ -26,6 +26,8 @@ import LocationsEdit from './pages/LocationsEdit';
 import ExperiencesPost from './pages/ExperiencesPost';
 import ExperiencesEdit from './pages/ExperiencesEdit';
 import PaidExperiencesPost from './pages/PaidExperiencesPost';
+import RolesPost from './pages/RolesPost';
+import RolesEdit from './pages/RolesEdit';
 
 // App conditionally renders pages by the URL path.
 function App() {
@@ -33,6 +35,7 @@ function App() {
     const [review, onEditReview ] = useState([]);
     const [location, onEditLocation ] = useState([]);
     const [experience, onEditExperience ] = useState([]);
+    const [ role, onEditRole ] = useState([]);
 
     return (
         <Router>
@@ -58,7 +61,10 @@ function App() {
                     <Route path="/reviews/create" element={<ReviewsPost />} />
                     <Route path="/reviews/edit/:id" element={<ReviewsEdit review={review} />} />
 
-                    <Route path="/roles" element={<Roles />} />
+                    <Route path="/roles" element={<Roles onEditRole={onEditRole} />} />
+                    <Route path="/roles/create" element={<RolesPost />} />
+                    <Route path="/roles/edit/:id" element={<RolesEdit role={role} />} />
+
                     <Route path="/roleCategories" element={<RoleCategories />} />
                 </Routes>
             </div>
