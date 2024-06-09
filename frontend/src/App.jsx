@@ -25,6 +25,7 @@ import LocationsPost from './pages/LocationsPost';
 import LocationsEdit from './pages/LocationsEdit';
 import ExperiencesPost from './pages/ExperiencesPost';
 import ExperiencesEdit from './pages/ExperiencesEdit';
+import PaidExperiencesPost from './pages/PaidExperiencesPost';
 
 // App conditionally renders pages by the URL path.
 function App() {
@@ -51,6 +52,7 @@ function App() {
                     <Route path="/experiences/edit/:id" element={<ExperiencesEdit experience={experience} />} />
 
                     <Route path="/paidExperiences" element={<PaidExperiences />} />
+                    <Route path="/paidExperiences/create" element={<PaidExperiencesPost />} />
 
                     <Route path="/reviews" element={<Reviews onEditReview={onEditReview} />} />
                     <Route path="/reviews/create" element={<ReviewsPost />} />
