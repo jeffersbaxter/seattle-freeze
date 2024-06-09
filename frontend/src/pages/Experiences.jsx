@@ -35,8 +35,8 @@ const Experiences = () => {
         try {
             const URL = import.meta.env.VITE_API_URL + "locations";
             const response = await axios.get(URL);
-
-            setLocations(response.data);
+            const _locations = [{locationId: "NULL", address: "Null"}, ...response.data.map(location => ({locationId: location.locationId, address: `${location.addressNumber} ${location.streetName}, ${location.city}, ${location.state}, ${location.zipCode}`}))]
+            setLocations(_locations);
         } catch (error) {
             console.error('Error fetching locations:', error);
         }
@@ -99,7 +99,7 @@ const Experiences = () => {
             date: (experience.date ? experience.date.substring(0, 16) : ""), 
             price: (experience.price ? experience.price : ""), 
             minBirthdate: (!!experience.minBirthdate ? experience.minBirthdate.substring(0, 10) : ""), 
-            locationId: experience.locationId 
+            locationId: experience.locationId !== null ? experience.locationId : ""
         });
         setShowAddExperience(true);
     };
@@ -166,7 +166,7 @@ const Experiences = () => {
                                 <option value="">Select Location</option>
                                 {locations.map(location => (
                                     <option key={location.locationId} value={location.locationId}>
-                                        {`${location.addressNumber} ${location.streetName}, ${location.city}, ${location.state}, ${location.zipCode}`}
+                                        {`${location.address}`}
                                     </option>
                                 ))}
                             </select>
