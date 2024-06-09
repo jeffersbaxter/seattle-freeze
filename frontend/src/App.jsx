@@ -6,7 +6,7 @@
  * Source URL: https://github.com/react-cosmos/create-react-app-example/blob/master/src/App.js
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
 import './style.css'; 
 import Home from './pages/Home'; 
@@ -17,15 +17,18 @@ import PaidExperiences from './pages/PaidExperiences';
 import Reviews from './pages/Reviews'; 
 import Roles from './pages/Roles'; 
 import RoleCategories from './pages/RoleCategories'; 
+import PatronsPost from './pages/PatronsPost';
 
 // App conditionally renders pages by the URL path.
 function App() {
+    // const [patron, on]
     return (
         <Router>
             <div className="App">
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/patrons" element={<Patrons />} />
+                    <Route path="/patrons/create" element={<PatronsPost />} />
                     <Route path="/locations" element={<Locations />} />
                     <Route path="/experiences" element={<Experiences />} />
                     <Route path="/paidExperiences" element={<PaidExperiences />} />
