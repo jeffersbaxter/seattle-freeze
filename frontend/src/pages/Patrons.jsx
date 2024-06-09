@@ -5,12 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import '../style.css'; 
 
-const Patrons = () => {
+const Patrons = ({ onEditPatron }) => {
     const [patrons, setPatrons] = useState([]);
     const [filteredPatrons, setFilteredPatrons] = useState([]);
-    const [showAddPatron, setShowAddPatron] = useState(false);
-    const [editPatronId, setEditPatronId] = useState(null);
-    const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', birthdate: '' });
     const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
@@ -28,11 +25,6 @@ const Patrons = () => {
         } catch (error) {
             console.error('Error fetching patrons:', error);
         }
-    };
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
     };
 
     const handleSearchChange = (e) => {
@@ -53,30 +45,9 @@ const Patrons = () => {
         navigate("/patrons/create");
     };
 
-    const handleCancelClick = () => {
-        setShowAddPatron(false);
-        setEditPatronId(null);
-        setFormData({ firstName: '', lastName: '', email: '', birthdate: '' });
-    };
-
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
-        const url = `${import.meta.env.VITE_API_URL}patrons/${editPatronId}`
-
-        try {
-            const EDIT_URL = `${import.meta.env.VITE_API_URL}patrons/${editPatronId}`;
-            const response = await axios.put(EDIT_URL, formData);
-            fetchPatrons();
-            handleCancelClick();
-        } catch (error) {
-            console.error('Error submitting form:', error);
-        }
-    };
-
     const handleEditClick = (patron) => {
-        setEditPatronId(patron.patronId);
-        setFormData({ firstName: patron.firstName, lastName: patron.lastName, email: patron.email, birthdate: patron.birthdate });
-        setShowAddPatron(true);
+        onEditPatron(patron);
+        navigate(`/patrons/edit/${patron.patronId}`);
     };
 
     const handleDeleteClick = async (patronId) => {
@@ -106,76 +77,44 @@ const Patrons = () => {
                     <li><Link to="/roleCategories">Role Categories</Link></li>
                 </ul>
             </nav>
-            {showAddPatron ? (
-                <div className="add-patron-form">
-                    <h2>{editPatronId ? 'Edit Patron' : 'Add Patron'}</h2>
-                    <form onSubmit={handleFormSubmit}>
-                        <label>
-                            First Name:
-                            <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} />
-                        </label>
-                        <br />
-                        <label>
-                            Last Name:
-                            <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} />
-                        </label>
-                        <br />
-                        <label>
-                            Email:
-                            <input type="email" name="email" value={formData.email} onChange={handleInputChange} />
-                        </label>
-                        <br />
-                        <label>
-                            Birthdate:
-                            <input type="date" name="birthdate" value={formData.birthdate.substring(0, 10)} onChange={handleInputChange} />
-                        </label>
-                        <br />
-                        <button type="submit">{editPatronId ? 'Update Patron' : 'Add Patron'}</button>
-                        <button type="button" onClick={handleCancelClick}>Cancel</button>
-                    </form>
-                </div>
-            ) : (
-                <>
-                    <button onClick={handleNewPatronClick}>New Patron</button>
-                    <div className="search-box">
-                        <label htmlFor="search">Search by Name:</label>
-                        <input
-                            type="text"
-                            id="search"
-                            name="search"
-                            value={searchQuery}
-                            onChange={handleSearchChange}
-                            placeholder="Enter name"
-                        />
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                                <th>Patron ID</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Birthdate</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredPatrons.map((patron) => (
-                                <tr key={patron.patronId}>
-                                    <td><button onClick={() => handleEditClick(patron)}>Edit</button></td>
-                                    <td><button onClick={() => handleDeleteClick(patron.patronId)}>Delete</button></td>
-                                    <td>{patron.patronId}</td>
-                                    <td>{patron.firstName}</td>
-                                    <td>{patron.lastName}</td>
-                                    <td>{patron.email}</td>
-                                    <td>{patron.birthdate.substring(0, 10)}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </>
-            )}
+            <button onClick={handleNewPatronClick}>New Patron</button>
+            <div className="search-box">
+                <label htmlFor="search">Search by Name:</label>
+                <input
+                    type="text"
+                    id="search"
+                    name="search"
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                    placeholder="Enter name"
+                />
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                        <th>Patron ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Birthdate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {filteredPatrons.map((patron) => (
+                        <tr key={patron.patronId}>
+                            <td><button onClick={() => handleEditClick(patron)}>Edit</button></td>
+                            <td><button onClick={() => handleDeleteClick(patron.patronId)}>Delete</button></td>
+                            <td>{patron.patronId}</td>
+                            <td>{patron.firstName}</td>
+                            <td>{patron.lastName}</td>
+                            <td>{patron.email}</td>
+                            <td>{patron.birthdate.substring(0, 10)}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 }
