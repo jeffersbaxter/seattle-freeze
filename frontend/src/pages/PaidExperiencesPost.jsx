@@ -78,14 +78,14 @@ const PaidExperiencesPost = () => {
             <div className="add-paid-experience-form">
                 <h2>Create Paid Experience</h2>
                 <form onSubmit={handleFormSubmit}>
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Cost:
-                        <input type="number" name="cost" value={formData.cost} onChange={handleInputChange} />
+                        <input type="number" name="cost" value={formData.cost} onChange={handleInputChange} style={{ border: '1.5px solid black'}}/>
                     </label>
                     <br />
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Experience:
-                        <select name="experienceId" value={formData.experienceId} onChange={handleInputChange}>
+                        <select name="experienceId" value={formData.experienceId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
                             <option value="">Select Experience</option>
                             {experiences.map(experience => (
                                 <option key={experience.experienceId} value={experience.experienceId}>
@@ -95,9 +95,9 @@ const PaidExperiencesPost = () => {
                         </select>
                     </label>
                     <br />
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Patron:
-                        <select name="patronId" value={formData.patronId} onChange={handleInputChange}>
+                        <select name="patronId" value={formData.patronId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
                             <option value="">Select Patron</option>
                             {patrons.map(patron => (
                                 <option key={patron.patronId} value={patron.patronId}>

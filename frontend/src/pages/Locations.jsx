@@ -80,7 +80,7 @@ const Locations = ({ onEditLocation }) => {
             </nav>
             <button onClick={handleNewLocationClick}>New Location</button>
                 <div className="search-box">
-                    <label htmlFor="search">Search by Street Name or City:</label>
+                    <label htmlFor="search" style={{ fontWeight: 'bold'}}>Search by Street Name or City:</label>
                     <input
                         type="text"
                         id="search"

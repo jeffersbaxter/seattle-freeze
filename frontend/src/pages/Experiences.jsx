@@ -78,7 +78,7 @@ const Experiences = ({ onEditExperience }) => {
             </nav>
             <button onClick={handleNewExperienceClick}>New Experience</button>
                 <div className="search-box">
-                    <label htmlFor="search">Search by Title:</label>
+                    <label htmlFor="search" style={{ fontWeight: 'bold'}}>Search by Title:</label>
                     <input
                         type="text"
                         id="search"

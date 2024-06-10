@@ -118,7 +118,7 @@ const Roles = ({ onEditRole }) => {
             </nav>
             <button onClick={handleNewRoleClick}>New Role</button>
                 <div className="search-box">
-                    <label htmlFor="search">Search by Patron, Role Category, or Experience:</label>
+                    <label htmlFor="search" style={{ fontWeight: 'bold'}}>Search by Patron, Role Category, or Experience:</label>
                     <input
                         type="text"
                         id="search"

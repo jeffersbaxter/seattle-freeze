@@ -30,6 +30,8 @@ const PatronsEdit = ({ patronToEdit }) => {
         navigate("/patrons");
     };
 
+    const today = new Date().toISOString().split('T')[0];
+    
     return (
         <>
             <header>
@@ -50,24 +52,24 @@ const PatronsEdit = ({ patronToEdit }) => {
             <div className="add-patron-form">
                 <h2>Edit a Patron</h2>
                 <form onSubmit={handleFormSubmit}>
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         First Name:
-                        <input type="text" name="firstName" value={patron.firstName} onChange={handleInputChange} />
+                        <input type="text" name="firstName" value={patron.firstName} onChange={handleInputChange} style={{ border: '1.5px solid black'}} />
                     </label>
                     <br />
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Last Name:
-                        <input type="text" name="lastName" value={patron.lastName} onChange={handleInputChange} />
+                        <input type="text" name="lastName" value={patron.lastName} onChange={handleInputChange} style={{ border: '1.5px solid black'}}/>
                     </label>
                     <br />
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Email:
-                        <input type="email" name="email" value={patron.email} onChange={handleInputChange} />
+                        <input type="email" name="email" value={patron.email} onChange={handleInputChange} style={{ border: '1.5px solid black'}}/>
                     </label>
                     <br />
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Birthdate:
-                        <input type="date" name="birthdate" value={patron.birthdate.substring(0, 10)} onChange={handleInputChange} />
+                        <input type="date" name="birthdate" value={patron.birthdate.substring(0, 10)} onChange={handleInputChange} max={today} style={{ border: '1.5px solid black'}}/>
                     </label>
                     <br />
                     <button type="submit">Save Changes</button>

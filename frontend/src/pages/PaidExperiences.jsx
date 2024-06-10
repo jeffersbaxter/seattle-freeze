@@ -73,7 +73,7 @@ const PaidExperiences = () => {
             </nav>
             <button onClick={handleNewPaidExperienceClick}>New Paid Experience</button>
                 <div className="search-box">
-                    <label htmlFor="search">Search by Experience or Patron:</label>
+                    <label htmlFor="search" style={{ fontWeight: 'bold'}}>Search by Experience or Patron:</label>
                     <input
                         type="text"
                         id="search"

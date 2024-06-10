@@ -92,3 +92,10 @@ Seattle Freeze is an experience-management system that allows people to organize
  * Jeffers deleted the example waterfall queries with individual REST routes for our backend API.
  * Source URL: https://canvas.oregonstate.edu/courses/1958399/assignments/9589645?module_item_id=24181790
 
+# Sources from google
+
+## frontend/src/style.css
+* Date: 6/9/2024
+* Sourced a free stock photo
+* Jackson selected a free photo via the web for the background of the frontend 
+* Source URL: https://www.istockphoto.com/photo/sunset-seattle-gm615989790-107034061?irclickid=USs1uF2DyxyKU5eRVBQ-TVFQUkHXZpX30Q3EQc0&irgwc=1&cid=IS&utm_medium=affiliate_SP&utm_source=FreeImages&clickid=USs1uF2DyxyKU5eRVBQ-TVFQUkHXZpX30Q3EQc0&utm_term=seattle&utm_campaign=srp_freephoto_inline-popup&utm_content=270498&irpid=246195 

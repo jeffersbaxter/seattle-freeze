@@ -47,6 +47,9 @@ const ExperiencesPost = () => {
         }
     };
 
+    const todaysdate = new Date().toISOString().slice(0, 16);
+    const today = new Date().toISOString().split('T')[0];
+
     return (
         <div className="container">
             <header>
@@ -67,34 +70,34 @@ const ExperiencesPost = () => {
             <div className="add-experience-form">
                 <h2>Create an Experience</h2>
                 <form onSubmit={handleFormSubmit}>
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Title:
-                        <input type="text" name="title" value={formData.title} onChange={handleInputChange} />
+                        <input type="text" name="title" value={formData.title} onChange={handleInputChange} style={{ border: '1.5px solid black'}}/>
                     </label>
                     <br />
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Description:
-                        <input type="text" name="description" value={formData.description} onChange={handleInputChange} />
+                        <input type="text" name="description" value={formData.description} onChange={handleInputChange} style={{ border: '1.5px solid black'}}/>
                     </label>
                     <br />
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Date:
-                        <input type="datetime-local" name="date" value={formData.date} onChange={handleInputChange} />
+                        <input type="datetime-local" name="date" value={formData.date} onChange={handleInputChange} min={todaysdate} style={{ border: '1.5px solid black'}}/>
                     </label>
                     <br />
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Price:
-                        <input type="text" name="price" value={formData.price} onChange={handleInputChange} />
+                        <input type="text" name="price" value={formData.price} onChange={handleInputChange} style={{ border: '1.5px solid black'}}/>
                     </label>
                     <br />
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Min Birthdate:
-                        <input type="date" name="minBirthdate" value={formData.minBirthdate} onChange={handleInputChange} />
+                        <input type="date" name="minBirthdate" value={formData.minBirthdate} onChange={handleInputChange} max={today} style={{ border: '1.5px solid black'}}/>
                     </label>
                     <br />
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Location:
-                        <select name="locationId" value={formData.locationId} onChange={handleInputChange}>
+                        <select name="locationId" value={formData.locationId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
                             <option value="">Select Location</option>
                             {locations.map(location => (
                                 <option key={location.locationId} value={location.locationId}>
