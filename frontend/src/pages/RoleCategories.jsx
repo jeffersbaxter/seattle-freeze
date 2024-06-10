@@ -105,9 +105,9 @@ const RoleCategories = () => {
                 <div className="add-role-category-form">
                     <h2>{editRoleCategoryId ? 'Edit Role Category' : 'Add Role Category'}</h2>
                     <form onSubmit={handleFormSubmit}>
-                        <label>
+                        <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                             Description:
-                            <input type="text" name="roleDescription" value={formData.roleDescription} onChange={handleInputChange} />
+                            <input type="text" name="roleDescription" value={formData.roleDescription} onChange={handleInputChange} style={{ border: '1.5px solid black'}}/>
                         </label>
                         <br />
                         <button type="submit">{editRoleCategoryId ? 'Update Role Category' : 'Add Role Category'}</button>
@@ -118,7 +118,7 @@ const RoleCategories = () => {
                 <>
                     <button onClick={handleNewRoleCategoryClick}>New Role Category</button>
                     <div className="search-box">
-                        <label htmlFor="search">Search by Description:</label>
+                        <label htmlFor="search" style={{ fontWeight: 'bold'}}>Search by Description:</label>
                         <input
                             type="text"
                             id="search"

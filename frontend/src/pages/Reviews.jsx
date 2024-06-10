@@ -83,7 +83,7 @@ const Reviews = ({ onEditReview }) => {
             </nav>
             <button onClick={handleNewReviewClick}>New Review</button>
             <div className="search-box">
-                <label htmlFor="search">Search by Rating, Message, Experience, or Patron:</label>
+                <label htmlFor="search" style={{ fontWeight: 'bold'}}>Search by Rating, Message, Experience, or Patron:</label>
                 <input
                     type="text"
                     id="search"

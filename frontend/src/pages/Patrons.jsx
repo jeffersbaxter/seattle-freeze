@@ -79,7 +79,7 @@ const Patrons = ({ onEditPatron }) => {
             </nav>
             <button onClick={handleNewPatronClick}>New Patron</button>
             <div className="search-box">
-                <label htmlFor="search">Search by Name:</label>
+                <label htmlFor="search" style={{ fontWeight: 'bold'}}>Search by Name:</label>
                 <input
                     type="text"
                     id="search"

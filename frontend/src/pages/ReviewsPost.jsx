@@ -80,19 +80,19 @@ const ReviewsPost = () => {
             <div className="add-review-form">
                 <h2>Create a Review</h2>
                 <form onSubmit={handleFormSubmit}>
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Rating (0 - 10):
-                        <input type="number" name="rating" value={formData.rating} onChange={handleInputChange} min="0" max="10" />
+                        <input type="number" name="rating" value={formData.rating} onChange={handleInputChange} min="0" max="10" style={{ border: '1.5px solid black'}}/>
                     </label>
                     <br />
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Message:
-                        <input type="text" name="message" value={formData.message} onChange={handleInputChange} />
+                        <input type="text" name="message" value={formData.message} onChange={handleInputChange} style={{ border: '1.5px solid black'}}/>
                     </label>
                     <br />
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Experience:
-                        <select name="experienceId" value={formData.experienceId} onChange={handleInputChange}>
+                        <select name="experienceId" value={formData.experienceId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
                             <option value="">Select Experience</option>
                             {experiences.map(experience => (
                                 <option key={experience.experienceId} value={experience.experienceId}>
@@ -102,9 +102,9 @@ const ReviewsPost = () => {
                         </select>
                     </label>
                     <br />
-                    <label>
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Patron:
-                        <select name="patronId" value={formData.patronId} onChange={handleInputChange}>
+                        <select name="patronId" value={formData.patronId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
                             <option value="">Select Patron</option>
                             {patrons.map(patron => (
                                 <option key={patron.patronId} value={patron.patronId}>
