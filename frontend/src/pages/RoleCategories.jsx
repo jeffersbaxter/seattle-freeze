@@ -86,29 +86,14 @@ const RoleCategories = () => {
 
     return (
         <div className="container">
-            <header>
-                <h1>Role Categories</h1>
-            </header>
-            <nav>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/patrons">Patrons</Link></li>
-                    <li><Link to="/experiences">Experiences</Link></li>
-                    <li><Link to="/paidExperiences">Paid Experiences</Link></li>
-                    <li><Link to="/locations">Locations</Link></li>
-                    <li><Link to="/reviews">Reviews</Link></li>
-                    <li><Link to="/roles">Roles</Link></li>
-                    <li><Link to="/roleCategories">Role Categories</Link></li>
-                </ul>
-            </nav>
             {showAddRoleCategory ? (
                 <div className="add-role-category-form">
                     <h2>{editRoleCategoryId ? 'Edit Role Category' : 'Add Role Category'}</h2>
                     <form onSubmit={handleFormSubmit}>
                         <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                             Description:
-                            <input type="text" name="roleDescription" value={formData.roleDescription} onChange={handleInputChange} style={{ border: '1.5px solid black'}}/>
                         </label>
+                        <input type="text" required name="roleDescription" value={formData.roleDescription} onChange={handleInputChange} style={{ border: '1.5px solid black'}}/>
                         <br />
                         <button type="submit">{editRoleCategoryId ? 'Update Role Category' : 'Add Role Category'}</button>
                         <button type="button" onClick={handleCancelClick}>Cancel</button>
@@ -116,6 +101,7 @@ const RoleCategories = () => {
                 </div>
             ) : (
                 <>
+                    <h2>Role Categories</h2>
                     <button onClick={handleNewRoleCategoryClick}>New Role Category</button>
                     <div className="search-box">
                         <label htmlFor="search" style={{ fontWeight: 'bold'}}>Search by Description:</label>

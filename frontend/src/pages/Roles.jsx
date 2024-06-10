@@ -101,21 +101,7 @@ const Roles = ({ onEditRole }) => {
 
     return (
         <div className="container">
-            <header>
-                <h1>Roles</h1>
-            </header>
-            <nav>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/patrons">Patrons</Link></li>
-                    <li><Link to="/experiences">Experiences</Link></li>
-                    <li><Link to="/paidExperiences">Paid Experiences</Link></li>
-                    <li><Link to="/locations">Locations</Link></li>
-                    <li><Link to="/reviews">Reviews</Link></li>
-                    <li><Link to="/roles">Roles</Link></li>
-                    <li><Link to="/roleCategories">Role Categories</Link></li>
-                </ul>
-            </nav>
+            <h2>Roles</h2>
             <button onClick={handleNewRoleClick}>New Role</button>
                 <div className="search-box">
                     <label htmlFor="search" style={{ fontWeight: 'bold'}}>Search by Patron, Role Category, or Experience:</label>
@@ -145,11 +131,8 @@ const Roles = ({ onEditRole }) => {
                                 <td><button onClick={() => handleEditClick(role)}>Edit</button></td>
                                 <td><button onClick={() => handleDeleteClick(role.roleId)}>Delete</button></td>
                                 <td>{role.roleId}</td>
-                                {/* <td>{`${patrons.find(patron => patron.patronId === role.patronId)?.firstName} ${patrons.find(patron => patron.patronId === role.patronId)?.lastName}`}</td> */}
                                 <td>{role.firstName} {role.lastName}</td>
-                                {/* <td>{roleCategories.find(roleCategory => roleCategory.roleCategoryId === role.roleCategoryId)?.roleDescription}</td> */}
                                 <td>{role.roleDescription}</td>
-                                {/* <td>{experiences.find(exp => exp.experienceId === role.experienceId)?.title}</td> */}
                                 <td>{role.title}</td>
                             </tr>
                         ))}

@@ -61,22 +61,8 @@ const Experiences = ({ onEditExperience }) => {
 
     return (
         <div className="container">
-            <header>
-                <h1>Experiences</h1>
-            </header>
-            <nav>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/patrons">Patrons</Link></li>
-                    <li><Link to="/experiences">Experiences</Link></li>
-                    <li><Link to="/paidExperiences">Paid Experiences</Link></li>
-                    <li><Link to="/locations">Locations</Link></li>
-                    <li><Link to="/reviews">Reviews</Link></li>
-                    <li><Link to="/roles">Roles</Link></li>
-                    <li><Link to="/roleCategories">Role Categories</Link></li>
-                </ul>
-            </nav>
-            <button onClick={handleNewExperienceClick}>New Experience</button>
+            <h2>Experiences</h2>
+            <button onClick={handleNewExperienceClick}>Create an Experience</button>
                 <div className="search-box">
                     <label htmlFor="search" style={{ fontWeight: 'bold'}}>Search by Title:</label>
                     <input

@@ -63,21 +63,7 @@ const Locations = ({ onEditLocation }) => {
 
     return (
         <div className="container">
-            <header>
-                <h1>Locations</h1>
-            </header>
-            <nav>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/patrons">Patrons</Link></li>
-                    <li><Link to="/experiences">Experiences</Link></li>
-                    <li><Link to="/paidExperiences">Paid Experiences</Link></li>
-                    <li><Link to="/locations">Locations</Link></li>
-                    <li><Link to="/reviews">Reviews</Link></li>
-                    <li><Link to="/roles">Roles</Link></li>
-                    <li><Link to="/roleCategories">Role Categories</Link></li>
-                </ul>
-            </nav>
+            <h2>Locations</h2>
             <button onClick={handleNewLocationClick}>New Location</button>
                 <div className="search-box">
                     <label htmlFor="search" style={{ fontWeight: 'bold'}}>Search by Street Name or City:</label>
