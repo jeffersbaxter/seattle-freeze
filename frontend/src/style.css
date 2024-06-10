@@ -4,9 +4,10 @@
 
 body { 
     padding: 20px;
-    background-image: url('./images/stephen-plopper-UmEyn_GYqFo-unsplash.jpg');
+    /* background-image: url('./images/stephen-plopper-UmEyn_GYqFo-unsplash.jpg'); */
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     height: 100vh; 
     margin: 0;
 }
@@ -37,7 +38,7 @@ nav ul li {
 
 nav ul li a {
     color: rgb(255, 255, 255);
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .search-box {

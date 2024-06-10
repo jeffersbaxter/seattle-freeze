@@ -7,8 +7,9 @@
  */
 
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'; 
 import './style.css'; 
+import './App.css';
 import Home from './pages/Home'; 
 import Patrons from './pages/Patrons'; 
 import Locations from './pages/Locations'; 
@@ -40,6 +41,21 @@ function App() {
     return (
         <Router>
             <div className="App">
+                <header>
+                    <h1>Seattle Freeze</h1>
+                </header>
+                <nav>
+                    <ul>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/patrons">Patrons</Link></li>
+                        <li><Link to="/experiences">Experiences</Link></li>
+                        <li><Link to="/paidExperiences">Paid Experiences</Link></li>
+                        <li><Link to="/locations">Locations</Link></li>
+                        <li><Link to="/reviews">Reviews</Link></li>
+                        <li><Link to="/roles">Roles</Link></li>
+                        <li><Link to="/roleCategories">Role Categories</Link></li>
+                    </ul>
+                </nav>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/patrons" element={<Patrons onEditPatron={onEditPatron} />} />

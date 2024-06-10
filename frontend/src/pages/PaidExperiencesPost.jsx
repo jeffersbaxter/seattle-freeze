@@ -60,52 +60,37 @@ const PaidExperiencesPost = () => {
 
     return (
         <div className="container">
-            <header>
-                <h1>Paid Experiences</h1>
-            </header>
-            <nav>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/patrons">Patrons</Link></li>
-                    <li><Link to="/experiences">Experiences</Link></li>
-                    <li><Link to="/paidExperiences">Paid Experiences</Link></li>
-                    <li><Link to="/locations">Locations</Link></li>
-                    <li><Link to="/reviews">Reviews</Link></li>
-                    <li><Link to="/roles">Roles</Link></li>
-                    <li><Link to="/roleCategories">Role Categories</Link></li>
-                </ul>
-            </nav>
             <div className="add-paid-experience-form">
                 <h2>Create Paid Experience</h2>
                 <form onSubmit={handleFormSubmit}>
                     <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Cost:
-                        <input type="number" name="cost" value={formData.cost} onChange={handleInputChange} style={{ border: '1.5px solid black'}}/>
                     </label>
+                    <input type="number" name="cost" value={formData.cost} onChange={handleInputChange} style={{ border: '1.5px solid black'}}/>
                     <br />
                     <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Experience:
-                        <select name="experienceId" value={formData.experienceId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
-                            <option value="">Select Experience</option>
-                            {experiences.map(experience => (
-                                <option key={experience.experienceId} value={experience.experienceId}>
-                                    {experience.title}
-                                </option>
-                            ))}
-                        </select>
                     </label>
+                    <select name="experienceId" value={formData.experienceId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
+                        <option value="">Select Experience</option>
+                        {experiences.map(experience => (
+                            <option key={experience.experienceId} value={experience.experienceId}>
+                                {experience.title}
+                            </option>
+                        ))}
+                    </select>
                     <br />
                     <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Patron:
-                        <select name="patronId" value={formData.patronId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
-                            <option value="">Select Patron</option>
-                            {patrons.map(patron => (
-                                <option key={patron.patronId} value={patron.patronId}>
-                                    {`${patron.firstName} ${patron.lastName}`}
-                                </option>
-                            ))}
-                        </select>
                     </label>
+                    <select name="patronId" value={formData.patronId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
+                        <option value="">Select Patron</option>
+                        {patrons.map(patron => (
+                            <option key={patron.patronId} value={patron.patronId}>
+                                {`${patron.firstName} ${patron.lastName}`}
+                            </option>
+                        ))}
+                    </select>
                     <br />
                     <button type="submit">Create</button>
                     <button type="button" onClick={handleCancelClick}>Cancel</button>

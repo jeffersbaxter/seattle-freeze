@@ -6,21 +6,7 @@ import '../style.css';
 const Home = () => {
     return (
         <div className="container">
-            <header>
-                <h1>Seattle Freeze</h1>
-                    <nav>
-                        <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/patrons">Patrons</a></li>
-                            <li><a href="/experiences">Experiences</a></li>
-                            <li><a href="/paidExperiences">Paid Experiences</a></li>
-                            <li><a href="/locations">Locations</a></li>
-                            <li><a href="/reviews">Reviews</a></li>
-                            <li><a href="/roles">Roles</a></li>
-                            <li><a href="/roleCategories">Role Categories</a></li>
-                        </ul>
-                    </nav>
-            </header>
+            <h2>Welcome to Seattle Freeze!</h2>
         </div>
     );
 }
