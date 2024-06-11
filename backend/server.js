@@ -254,6 +254,36 @@ app.get('/api/experiences', function(req, res) {
 });
 
 /**
+ * Endpoint: /api/experiences/:_id
+ * Method: GET
+ * Description: Get Experience by id.
+ * Data: Array<{
+ *      experienceId: int,
+ *      title: string,
+ *      description: string,
+ *      date: date,
+ *      price: float,
+ *      minBirthdate: date,
+ *      locationId: int
+ * }>
+ */
+app.get('/api/experiences/:_id', function(req, res) {
+    if (!req.params._id) {
+        res.status(400).json({Error: "Invalid experienceId"});
+    } else {
+        const getExperiences = `SELECT * FROM Experiences WHERE experienceId = ${req.params._id};`;
+    
+        db.pool.query(getExperiences, function (err, results, fields){
+            if (err) {
+                res.status(err.code).json({Error: JSON.stringify(err)});
+            } else {
+                res.status(200).json(results);
+            }
+        });
+    }
+});
+
+/**
  * Endpoint: /api/experiences
  * Method: POST
  * Description: Create a new Experience.

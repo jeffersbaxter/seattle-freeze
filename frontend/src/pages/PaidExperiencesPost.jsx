@@ -11,8 +11,28 @@ const PaidExperiencesPost = () => {
 
     useEffect(() => {
         fetchExperiences();
-        fetchPatrons();
     }, []);
+
+    const fetchPatronsByDate = async (minDate) => {
+        try {
+            const URL = import.meta.env.VITE_API_URL + "patrons";
+            const response = await axios.get(URL);
+            let patrons = [];
+
+            if (minDate) {
+                // Filter patrons by Experience.minBirthdate if minBirthdate is set.
+                patrons = response.data.filter(p => {
+                    return minDate > new Date(p.birthdate).getTime()
+                });
+            } else {
+                patrons = response.data;
+            }
+
+            setPatrons(patrons);
+        } catch (error) {
+            console.error('Error fetching patrons:', error);
+        }
+    };
 
     const fetchExperiences = async () => {
         try {
@@ -25,20 +45,24 @@ const PaidExperiencesPost = () => {
         }
     };
 
-    const fetchPatrons = async () => {
-        try {
-            const URL = import.meta.env.VITE_API_URL + "patrons";
-            const response = await axios.get(URL);
-
-            setPatrons(response.data);
-        } catch (error) {
-            console.error('Error fetching patrons:', error);
-        }
-    };
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+    };
+
+    const handleExperienceChange = async (e) => {
+        handleInputChange(e);
+
+        try {
+            const URL = import.meta.env.VITE_API_URL + "experiences/" + e.target.value;
+            const response = await axios.get(URL);
+            const { minBirthdate } = response.data[0];
+            let formattedDate = minBirthdate ? new Date(minBirthdate).getTime() : null;
+
+            fetchPatronsByDate(formattedDate);
+        } catch (error) {
+            console.error('Error fetching experience with id: ' + id, error);
+        }
     };
 
     const handleCancelClick = () => {
@@ -71,7 +95,7 @@ const PaidExperiencesPost = () => {
                     <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Experience:
                     </label>
-                    <select name="experienceId" value={formData.experienceId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
+                    <select name="experienceId" required value={formData.experienceId} onChange={handleExperienceChange} style={{ border: '1.5px solid black'}}>
                         <option value="">Select Experience</option>
                         {experiences.map(experience => (
                             <option key={experience.experienceId} value={experience.experienceId}>
@@ -83,7 +107,7 @@ const PaidExperiencesPost = () => {
                     <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Patron:
                     </label>
-                    <select name="patronId" value={formData.patronId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
+                    <select name="patronId" disabled={!formData.experienceId} required value={formData.patronId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
                         <option value="">Select Patron</option>
                         {patrons.map(patron => (
                             <option key={patron.patronId} value={patron.patronId}>

@@ -12,17 +12,27 @@ const RolesEdit = ({ role }) => {
     const { id } = useParams()
 
     useEffect(() => {
-        fetchPatrons();
+        fetchExperienceById(formData.experienceId);
         fetchRoleCategories();
         fetchExperiences();
     }, []);
 
-    const fetchPatrons = async () => {
+    const fetchPatronsByDate = async (minDate) => {
         try {
             const URL = import.meta.env.VITE_API_URL + "patrons";
             const response = await axios.get(URL);
+            let patrons = [];
 
-            setPatrons(response.data);
+            if (minDate) {
+                // Filter patrons by Experience.minBirthdate if minBirthdate is set.
+                patrons = response.data.filter(p => {
+                    return minDate > new Date(p.birthdate).getTime()
+                });
+            } else {
+                patrons = response.data;
+            }
+
+            setPatrons(patrons);
         } catch (error) {
             console.error('Error fetching patrons:', error);
         }
@@ -36,6 +46,19 @@ const RolesEdit = ({ role }) => {
             setRoleCategories(response.data);
         } catch (error) {
             console.error('Error fetching role categories:', error);
+        }
+    };
+
+    const fetchExperienceById = async (experienceId) => {
+        try {
+            const URL = import.meta.env.VITE_API_URL + "experiences/" + experienceId;
+            const response = await axios.get(URL);
+            const { minBirthdate } = response.data[0];
+            let formattedDate = minBirthdate ? new Date(minBirthdate).getTime() : null;
+
+            fetchPatronsByDate(formattedDate);
+        } catch (error) {
+            console.error('Error fetching experience with id: ' + id, error);
         }
     };
 
@@ -53,6 +76,20 @@ const RolesEdit = ({ role }) => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+    };
+
+    const handleExperienceChange = async (e) => {
+        handleInputChange(e);
+
+        try {
+            const URL = import.meta.env.VITE_API_URL + "experiences/" + e.target.value;
+            const response = await axios.get(URL);
+            const { minBirthdate } = response.data[0];
+
+            fetchPatronsByDate(new Date(minBirthdate).getTime())
+        } catch (error) {
+            console.error('Error fetching experience with id: ' + e.target.value, error);
+        }
     };
 
     const handleCancelClick = () => {
@@ -77,21 +114,9 @@ const RolesEdit = ({ role }) => {
                 <h2>Edit Role</h2>
                 <form onSubmit={handleFormSubmit}>
                     <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
-                        Patron:
-                    </label>
-                    <select name="patronId" value={formData.patronId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
-                        <option value="">Select Patron</option>
-                        {patrons.map(patron => (
-                            <option key={patron.patronId} value={patron.patronId}>
-                                {`${patron.firstName} ${patron.lastName}`}
-                            </option>
-                        ))}
-                    </select>
-                    <br />
-                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Role Category:
                     </label>
-                    <select name="roleCategoryId" value={formData.roleCategoryId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
+                    <select name="roleCategoryId" required value={formData.roleCategoryId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
                         <option value="">Select Role Category</option>
                         {roleCategories.map(roleCategory => (
                             <option key={roleCategory.roleCategoryId} value={roleCategory.roleCategoryId}>
@@ -103,11 +128,23 @@ const RolesEdit = ({ role }) => {
                     <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
                         Experience:
                     </label>
-                    <select name="experienceId" value={formData.experienceId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
+                    <select name="experienceId" required value={formData.experienceId} onChange={handleExperienceChange} style={{ border: '1.5px solid black'}}>
                         <option value="">Select Experience</option>
                         {experiences.map(experience => (
                             <option key={experience.experienceId} value={experience.experienceId}>
                                 {experience.title}
+                            </option>
+                        ))}
+                    </select>
+                    <br />
+                    <label style={{fontSize: '18px', marginBottom: '0.5px', display: 'block', fontWeight: 'bold'}}>
+                        Patron:
+                    </label>
+                    <select name="patronId" required value={formData.patronId} onChange={handleInputChange} style={{ border: '1.5px solid black'}}>
+                        <option value="">Select Patron</option>
+                        {patrons.map(patron => (
+                            <option key={patron.patronId} value={patron.patronId}>
+                                {`${patron.firstName} ${patron.lastName}`}
                             </option>
                         ))}
                     </select>
